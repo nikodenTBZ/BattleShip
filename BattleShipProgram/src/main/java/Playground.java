@@ -108,7 +108,21 @@ public class Playground {
     }
 
     public void printBoard(){
-
+        System.out.println("\t├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┤");
+        for(int i = 0; i < 11; i++) {
+            System.out.println("\t├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┤");
+        }
+        System.out.println("\t├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┤");
+        System.out.println("\t\tA\t\tB\t\tC\t\tD\t\tE\t\tF\t\tG\t\tH\t\tI\t\tJ");
     }
 
-}
+    public void printLogic(){
+        int iii = 0;
+
+            System.out.println("║");
+            if (iii < 7) {
+
+            }
+        }
+    }
+
