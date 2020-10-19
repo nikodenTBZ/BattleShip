@@ -65,8 +65,10 @@ public class Playground {
                 String[] locationAndDestination = input.split(" ");
 
                 //Create two points with the entered Coordinates, converts the letters to numbers
-                p1 = new Point(letterMap.get(locationAndDestination[0].charAt(0)), Integer.parseInt(locationAndDestination[0].substring(1, 2)));
-                p2 = new Point(letterMap.get(locationAndDestination[1].charAt(0)), Integer.parseInt(locationAndDestination[1].substring(1, 2)));
+                p1 = new Point(letterMap.get(locationAndDestination[0].charAt(0)),
+                        Integer.parseInt(locationAndDestination[0].substring(1, 2)));
+                p2 = new Point(letterMap.get(locationAndDestination[1].charAt(0)),
+                        Integer.parseInt(locationAndDestination[1].substring(1, 2)));
 
                 //End the game if the user entered resign
             } else if (input.equals("resign")) {
@@ -76,7 +78,6 @@ public class Playground {
 
         pointArrayList.add(p1);
         pointArrayList.add(p2);
-
 
         return pointArrayList;
     }
@@ -88,8 +89,6 @@ public class Playground {
      * @return
      */
     public boolean shoot(Point p) {
-
-
 
         return false;
     }
