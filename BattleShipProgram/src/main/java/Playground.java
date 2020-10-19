@@ -2,29 +2,20 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class Playground {
 
+    public Map<Character, Integer> letterMap = new HashMap<>();
     private HashMap<Point, Boat> shipsPlayer1;
     private HashMap<Point, Boat> shipsPlayer2;
     private HashMap<Point, Boat> shotsPlayer1;
     private HashMap<Point, Boat> shotsPlayer2;
     private HashMap<Point, Boat> sunkenShipsPlayer1;
     private HashMap<Point, Boat> sunkenShipsPlayer2;
-    public Map<Character, Integer> letterMap = new HashMap<>();
-
-
-    public Playground() {
-        this.shipsPlayer1 = new HashMap<>();
-        this.shipsPlayer2 = new HashMap<>();
-        this.shotsPlayer1 = new HashMap<>();
-        this.shotsPlayer2 = new HashMap<>();
-        this.sunkenShipsPlayer1 = new HashMap<>();
-        this.sunkenShipsPlayer2 = new HashMap<>();
-
-    }
-
+    
+    
     {
         letterMap.put('A', 1);
         letterMap.put('B', 2);
@@ -38,6 +29,15 @@ public class Playground {
         letterMap.put('J', 10);
     }
 
+    public Playground() {
+        this.shipsPlayer1 = new HashMap<>();
+        this.shipsPlayer2 = new HashMap<>();
+        this.shotsPlayer1 = new HashMap<>();
+        this.shotsPlayer2 = new HashMap<>();
+        this.sunkenShipsPlayer1 = new HashMap<>();
+        this.sunkenShipsPlayer2 = new HashMap<>();
+
+    }
 
     public void placeShips(int id) {
         ArrayList<Point> pointArrayList = getCorrectCoordinatesAndPoints("Please type in the location of the 5 boat: ");
@@ -108,19 +108,17 @@ public class Playground {
 
 
     public void printBoard() {
+        int number = 1;
         char[][] board = new char[10][10];
-        System.out.println("\t├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┤");
-        for (int y = 0; y < 10; y++) {
-            System.out.println("├");
-            for (int x = 0; x < 10; x++) {
-                System.out.println("\t" +  board[y][x] + "\t");
+        System.out.println(Config.letters);
+        System.out.println(Config.tab+ Config.line);
+        for (int y = 0; y < 10; y++, number++) {
+            System.out.print(number + Config.tab + Config.border);
+            for (int x = 0; x < 9; x++) {
+                System.out.print(Config.tab + board[y][x] + Config.tab + Config.border);
             }
-            System.out.println();
-            System.out.println("\t├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┤");
+            System.out.print(Config.tab + Config.tab + Config.border +"\n");
+            System.out.println(Config.tab + Config.line);
         }
-        System.out.println("\t├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┤");
-        System.out.println("\t\tA\t\tB\t\tC\t\tD\t\tE\t\tF\t\tG\t\tH\t\tI\t\tJ");
     }
-
-
 }
