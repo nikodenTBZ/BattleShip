@@ -6,22 +6,22 @@ import java.util.Scanner;
 
 public class Playground {
 
-    private HashMap<Point,Boat> shipsPlayer1;
-    private HashMap<Point,Boat> shipsPlayer2;
-    private HashMap<Point,Boat> shotsPlayer1;
-    private HashMap<Point,Boat> shotsPlayer2;
-    private HashMap<Point,Boat> sunkenShipsPlayer1;
-    private HashMap<Point,Boat> sunkenShipsPlayer2;
+    private HashMap<Point, Boat> shipsPlayer1;
+    private HashMap<Point, Boat> shipsPlayer2;
+    private HashMap<Point, Boat> shotsPlayer1;
+    private HashMap<Point, Boat> shotsPlayer2;
+    private HashMap<Point, Boat> sunkenShipsPlayer1;
+    private HashMap<Point, Boat> sunkenShipsPlayer2;
     public Map<Character, Integer> letterMap = new HashMap<>();
 
 
-    public Playground(){
-    this.shipsPlayer1 = new HashMap<>();
-    this.shipsPlayer2 = new HashMap<>();
-    this.shotsPlayer1 = new HashMap<>();
-    this.shotsPlayer2 = new HashMap<>();
-    this.sunkenShipsPlayer1 = new HashMap<>();
-    this.sunkenShipsPlayer2 = new HashMap<>();
+    public Playground() {
+        this.shipsPlayer1 = new HashMap<>();
+        this.shipsPlayer2 = new HashMap<>();
+        this.shotsPlayer1 = new HashMap<>();
+        this.shotsPlayer2 = new HashMap<>();
+        this.sunkenShipsPlayer1 = new HashMap<>();
+        this.sunkenShipsPlayer2 = new HashMap<>();
 
     }
 
@@ -39,16 +39,16 @@ public class Playground {
     }
 
 
-    public void placeShips(int id){
-    ArrayList<Point> pointArrayList = getCorrectCoordinatesAndPoints("Please type in the location of the 5 boat: ");
+    public void placeShips(int id) {
+        ArrayList<Point> pointArrayList = getCorrectCoordinatesAndPoints("Please type in the location of the 5 boat: ");
 
-    for (Point p : pointArrayList){
-        System.out.println(p.toString());
+        for (Point p : pointArrayList) {
+            System.out.println(p.toString());
+        }
+
     }
 
-    }
-
-    private ArrayList<Point> getCorrectCoordinatesAndPoints(String message){
+    private ArrayList<Point> getCorrectCoordinatesAndPoints(String message) {
         boolean isRegexValid = false;
         Scanner s = new Scanner(System.in);
         ArrayList<Point> pointArrayList = new ArrayList<>();
@@ -66,11 +66,11 @@ public class Playground {
                 String[] locationAndDestination = input.split(" ");
 
                 //Create two points with the entered Coordinates, converts the letters to numbers
-                p1 = new Point(letterMap.get(locationAndDestination[0].charAt(0)),Integer.parseInt(locationAndDestination[0].substring(1,2)) );
-                p2 = new Point(letterMap.get(locationAndDestination[1].charAt(0)), Integer.parseInt(locationAndDestination[1].substring(1,2)));
+                p1 = new Point(letterMap.get(locationAndDestination[0].charAt(0)), Integer.parseInt(locationAndDestination[0].substring(1, 2)));
+                p2 = new Point(letterMap.get(locationAndDestination[1].charAt(0)), Integer.parseInt(locationAndDestination[1].substring(1, 2)));
 
                 //End the game if the user entered resign
-            } else if (input.equals("resign")){
+            } else if (input.equals("resign")) {
                 isRegexValid = true;
             }
         } while (!isRegexValid);
@@ -82,45 +82,43 @@ public class Playground {
         return pointArrayList;
     }
 
-    private ArrayList<Point> getPointsBetween(Point p1, Point p2, int shipLenght){
-
+    private ArrayList<Point> getPointsBetween(Point p1, Point p2, int shipLenght) {
 
 
         return null;
     }
 
-    public boolean shoot(Point p){
+    public boolean shoot(Point p) {
 
 
         return false;
     }
 
 
-    private boolean canShoot(Point p){
+    private boolean canShoot(Point p) {
 
 
         return false;
     }
 
-    private boolean isShipAround(Point p1, Point p2){
+    private boolean isShipAround(Point p1, Point p2) {
 
         return false;
     }
 
-    public void printBoard(){
+
+    public void printBoard() {
+        char[][] board = new char[10][10];
         System.out.println("\t├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┤");
-        for(int i = 0; i < 11; i++) {
+        for (int y = 0; y < 10; y++) {
+            for (int x = 0; x < 10; x++) {
+                System.out.println("├" + "\t" +  board[y][x]);
+            }
             System.out.println("\t├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┤");
         }
         System.out.println("\t├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┤");
         System.out.println("\t\tA\t\tB\t\tC\t\tD\t\tE\t\tF\t\tG\t\tH\t\tI\t\tJ");
     }
 
-    private void printLogic(){
-        int iii = 0;
-            System.out.println("║");
-            if (iii < 7) {
-            }
-        }
-    }
 
+}
