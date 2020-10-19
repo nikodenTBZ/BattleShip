@@ -82,11 +82,6 @@ public class Playground {
         return pointArrayList;
     }
 
-    private ArrayList<Point> getPointsBetween(Point p1, Point p2, int shipLenght) {
-        System.out.println("Test");
-
-        return null;
-    }
 
     public boolean shoot(Point p) {
 
@@ -101,8 +96,43 @@ public class Playground {
         return false;
     }
 
-    private boolean isShipAround(Point p1, Point p2) {
+    private boolean isShipAround(Point p1, Point p2, HashMap<Point, Boat> ships) {
 
+        //Checks if the ship is placed horizontal
+        if (p1.getX() == p2.getX()){
+
+
+        } else {
+            int xStart;
+            int xEnd;
+            int yStart;
+            int yEnd;
+
+            if (p1.getX() < p2.getX()){
+                xStart = (int) p1.getX();
+                xEnd = (int) p2.getX();
+            } else{
+                xEnd = (int) p1.getX();
+                xStart = (int) p2.getX();
+            }
+
+            if (p1.getY() < p2.getY()){
+                yStart = (int) p1.getY();
+                yEnd = (int) p2.getY();
+            } else{
+                yEnd = (int) p1.getY();
+                yStart = (int) p2.getY();
+            }
+
+            for (int y = yStart; y < yEnd; y++){
+                for (int x = xStart; x < xEnd; x++){
+                    if (ships.containsKey(new Point(x,y))){
+                        return true;
+                    }
+                }
+            }
+
+        }
         return false;
     }
 
