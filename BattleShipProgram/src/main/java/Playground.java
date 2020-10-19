@@ -111,9 +111,11 @@ public class Playground {
         char[][] board = new char[10][10];
         System.out.println("\t├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┤");
         for (int y = 0; y < 10; y++) {
+            System.out.println("├");
             for (int x = 0; x < 10; x++) {
-                System.out.println("├" + "\t" +  board[y][x]);
+                System.out.println("\t" +  board[y][x] + "\t");
             }
+            System.out.println();
             System.out.println("\t├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┤");
         }
         System.out.println("\t├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┤");
