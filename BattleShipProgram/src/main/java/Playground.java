@@ -10,11 +10,11 @@ public class Playground {
     public Map<Character, Integer> letterMap = new HashMap<>();
     private HashMap<Point, Boat> shipsPlayer1;
     private HashMap<Point, Boat> shipsPlayer2;
-    private HashMap<Point, Boat> shotsPlayer1;
-    private HashMap<Point, Boat> shotsPlayer2;
-    private HashMap<Point, Boat> sunkenShipsPlayer1;
-    private HashMap<Point, Boat> sunkenShipsPlayer2;
-    
+    private HashMap<Point, Shot> shotsPlayer1;
+    private HashMap<Point, Shot> shotsPlayer2;
+    private HashMap<Point, Hit> sunkenShipsPlayer1;
+    private HashMap<Point, Hit> sunkenShipsPlayer2;
+    private int activePlayer;
     
     {
         letterMap.put('A', 1);
@@ -36,7 +36,7 @@ public class Playground {
         this.shotsPlayer2 = new HashMap<>();
         this.sunkenShipsPlayer1 = new HashMap<>();
         this.sunkenShipsPlayer2 = new HashMap<>();
-
+        this.activePlayer = 1;
     }
 
     public void placeShips(int id) {
@@ -83,15 +83,30 @@ public class Playground {
     }
 
 
+    /**
+     * Checks if the shoot is valid and then applies it
+     * @param p
+     * @return
+     */
     public boolean shoot(Point p) {
+
 
 
         return false;
     }
 
-
+    /**
+     * Validates if the shoot is valid
+     * @param p
+     * @return
+     */
     private boolean canShoot(Point p) {
 
+        if (activePlayer == 1){
+            //if (shotsPlayer1)
+        } else if (activePlayer == 2){
+
+        }
 
         return false;
     }
