@@ -1,3 +1,6 @@
+/**
+ *  All Strings used more then Once together in one File
+ */
 public class Config {
 
     public static String line = "├───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┼───────┤";

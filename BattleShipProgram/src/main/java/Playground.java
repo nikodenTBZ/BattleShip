@@ -2,7 +2,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Scanner;
 
 public class Playground {
@@ -114,7 +113,7 @@ public class Playground {
     private boolean isShipAround(Point p1, Point p2, HashMap<Point, Boat> ships) {
 
         //Checks if the ship is placed horizontal
-        if (p1.getX() == p2.getX()){
+        if (p1.getX() == p2.getX()) {
 
 
         } else {
@@ -123,25 +122,25 @@ public class Playground {
             int yStart;
             int yEnd;
 
-            if (p1.getX() < p2.getX()){
+            if (p1.getX() < p2.getX()) {
                 xStart = (int) p1.getX();
                 xEnd = (int) p2.getX();
-            } else{
+            } else {
                 xEnd = (int) p1.getX();
                 xStart = (int) p2.getX();
             }
 
-            if (p1.getY() < p2.getY()){
+            if (p1.getY() < p2.getY()) {
                 yStart = (int) p1.getY();
                 yEnd = (int) p2.getY();
-            } else{
+            } else {
                 yEnd = (int) p1.getY();
                 yStart = (int) p2.getY();
             }
 
-            for (int y = yStart; y < yEnd; y++){
-                for (int x = xStart; x < xEnd; x++){
-                    if (ships.containsKey(new Point(x,y))){
+            for (int y = yStart; y < yEnd; y++) {
+                for (int x = xStart; x < xEnd; x++) {
+                    if (ships.containsKey(new Point(x, y))) {
                         return true;
                     }
                 }
@@ -152,17 +151,21 @@ public class Playground {
     }
 
 
+    /**
+     * Print Board Method to Print the Board in the Console.
+     * Replace the Empty Elements with the needed Symboles
+     */
     public void printBoard() {
         int number = 1;
         char[][] board = new char[10][10];
         System.out.println(Config.letters);
-        System.out.println(Config.tab+ Config.line);
+        System.out.println(Config.tab + Config.line);
         for (int y = 0; y < 10; y++, number++) {
             System.out.print(number + Config.tab + Config.border);
             for (int x = 0; x < 9; x++) {
                 System.out.print(Config.tab + board[y][x] + Config.tab + Config.border);
             }
-            System.out.print(Config.tab + Config.tab + Config.border +"\n");
+            System.out.print(Config.tab + Config.tab + Config.border + "\n");
             System.out.println(Config.tab + Config.line);
         }
     }
