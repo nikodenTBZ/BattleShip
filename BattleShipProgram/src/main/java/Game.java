@@ -2,7 +2,8 @@ public class Game {
 
     public void playGame(){
         Playground playground = new Playground();
-
+        createUser();
+        playground.printBoard();
     }
 
     public void createUser(){

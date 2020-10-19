@@ -116,12 +116,10 @@ public class Playground {
         System.out.println("\t\tA\t\tB\t\tC\t\tD\t\tE\t\tF\t\tG\t\tH\t\tI\t\tJ");
     }
 
-    public void printLogic(){
+    private void printLogic(){
         int iii = 0;
-
             System.out.println("║");
             if (iii < 7) {
-
             }
         }
     }
