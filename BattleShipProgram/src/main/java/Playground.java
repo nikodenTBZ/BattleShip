@@ -103,7 +103,7 @@ public class Playground {
     private boolean canShoot(Point p) {
 
         if (activePlayer == 1){
-            //if (shotsPlayer1)
+            if (shotsPlayer1)
         } else if (activePlayer == 2){
 
         }
