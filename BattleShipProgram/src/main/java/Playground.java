@@ -83,7 +83,7 @@ public class Playground {
     }
 
     private ArrayList<Point> getPointsBetween(Point p1, Point p2, int shipLenght) {
-
+        System.out.println("Test");
 
         return null;
     }
