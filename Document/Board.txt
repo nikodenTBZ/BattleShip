@@ -1,0 +1,5 @@
+Oben:
+Eigene Schüsse und versenkte Schiffe des Anderen
+
+Unten:
+Eigene Boote, Schüsse des Gegners und eigene versunkene Schiffe
