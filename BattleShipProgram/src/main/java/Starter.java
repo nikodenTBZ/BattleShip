@@ -5,10 +5,7 @@ public class Starter {
     public static void main(String[] args) {
 
     Playground playground = new Playground();
-    playground.placeShips(1);
-
-
-playground.printBoard();
+    
 
     }
 }
