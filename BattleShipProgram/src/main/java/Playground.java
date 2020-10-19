@@ -14,7 +14,10 @@ public class Playground {
     private HashMap<Point, Hit> sunkenShipsPlayer1;
     private HashMap<Point, Hit> sunkenShipsPlayer2;
     private int activePlayer;
-    
+    private HashMap<Integer, Integer> availableShipsPlayer1;
+    private HashMap<Integer, Integer> availableShipsPlayer2;
+
+
     {
         letterMap.put('A', 1);
         letterMap.put('B', 2);
@@ -36,14 +39,21 @@ public class Playground {
         this.sunkenShipsPlayer1 = new HashMap<>();
         this.sunkenShipsPlayer2 = new HashMap<>();
         this.activePlayer = 1;
+        this.availableShipsPlayer1 = new HashMap<>();
+        fillAvailableMaps();
+        this.availableShipsPlayer2 = new HashMap<>(availableShipsPlayer1);
+
+    }
+    public void fillAvailableMaps(){
+        availableShipsPlayer1.put(5,1);
+        availableShipsPlayer1.put(4,2);
+        availableShipsPlayer1.put(3,3);
+        availableShipsPlayer1.put(2,4);
     }
 
-    public void placeShips(int id) {
-        ArrayList<Point> pointArrayList = getCorrectCoordinatesAndPoints("Please type in the location of the 5 boat: ");
+    public void placeShips() {
 
-        for (Point p : pointArrayList) {
-            System.out.println(p.toString());
-        }
+
 
     }
 
@@ -102,14 +112,37 @@ public class Playground {
     private boolean canShoot(Point p) {
 
         if (activePlayer == 1){
+            if (shotsPlayer1.containsKey(p)){
+                return false;
+            } else {
+                shotsPlayer1.put(p,new Shot());
+                return true;
+            }
         } else if (activePlayer == 2){
-
+            if (shotsPlayer2.containsKey(p)){
+                return false;
+            } else {
+                shotsPlayer2.put(p,new Shot());
+                return true;
+            }
         }
 
         return false;
     }
 
-    private boolean isShipAround(Point p1, Point p2, HashMap<Point, Boat> ships) {
+    private boolean canPlace(Point p1, Point p2){
+
+        if (!isShipAround(p1,p2)){
+
+        }
+
+
+
+        return false;
+    }
+
+    private boolean isShipAround(Point p1, Point p2) {
+        HashMap<Point,Boat> ships = activePlayer == 1 ? shipsPlayer1 : shipsPlayer2;
 
         //Checks if the ship is placed horizontal
         if (p1.getX() == p2.getX()) {
