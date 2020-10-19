@@ -4,6 +4,7 @@ public class Game {
         Playground playground = new Playground();
         createUser();
         playground.printBoard();
+
     }
 
     public void createUser(){
