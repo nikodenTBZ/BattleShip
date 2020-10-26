@@ -2,6 +2,6 @@ public class Hit extends Element{
 
 
     public Hit() {
-        super('✘');
+        super('x');
     }
 }
