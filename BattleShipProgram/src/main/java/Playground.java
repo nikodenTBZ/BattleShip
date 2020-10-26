@@ -145,7 +145,7 @@ public class Playground {
                 p2 = new Point(letterMap.get(locationAndDestination[1].charAt(0)),
                         Integer.parseInt(locationAndDestination[1].substring(1, 2)));
 
-                if (p1.getY() <= 10 && p2.getY() <= 10){
+                if (p1.getY() <= 10 && p2.getY() <= 10) {
                     isRegexValid = true;
                 }
 
@@ -180,7 +180,7 @@ public class Playground {
                 p1 = new Point(letterMap.get(locationAndDestination[0].charAt(0)),
                         Integer.parseInt(locationAndDestination[0].substring(1, 2)));
 
-                if (p1.getY() <= 10){
+                if (p1.getY() <= 10) {
                     isRegexValid = true;
                 }
                 //End the game if the user entered resign
@@ -200,8 +200,8 @@ public class Playground {
      * @return
      */
     public boolean shoot(Point p) {
-        if (canShoot(p)){
-            if (activePlayer == 1){
+        if (canShoot(p)) {
+            if (activePlayer == 1) {
                 shotsPlayer1.put(p, new Shot());
 
             } else {
@@ -215,21 +215,21 @@ public class Playground {
 
     /**
      * Checks if on the position of the shot is a Ship, if yes, add it to sunkenShips
+     *
      * @param p
      */
-    private void checkIfHit(Point p){
+    private void checkIfHit(Point p) {
 
-        if(activePlayer == 1){
-            if (shipsPlayer2.containsKey(p)){
-                sunkenShipsPlayer2.put(p,new Hit());
+        if (activePlayer == 1) {
+            if (shipsPlayer2.containsKey(p)) {
+                sunkenShipsPlayer2.put(p, new Hit());
             }
         } else {
-            if (shipsPlayer1.containsKey(p)){
-                sunkenShipsPlayer1.put(p,new Hit());
+            if (shipsPlayer1.containsKey(p)) {
+                sunkenShipsPlayer1.put(p, new Hit());
             }
         }
     }
-
 
 
     /**
@@ -261,12 +261,7 @@ public class Playground {
 
     private boolean canPlace(Point p1, Point p2) {
 
-        if (!isShipAround(p1, p2)) {
-
-        }
-
-
-        return false;
+        return !isShipAround(p1, p2);
     }
 
 
@@ -281,43 +276,38 @@ public class Playground {
         HashMap<Point, Boat> ships = activePlayer == 1 ? shipsPlayer1 : shipsPlayer2;
 
         //Checks if the ship is placed horizontal
-        if (p1.getX() == p2.getX()) {
 
+        int xStart;
+        int xEnd;
+        int yStart;
+        int yEnd;
 
+        if (p1.getX() < p2.getX()) {
+            xStart = (int) p1.getX();
+            xEnd = (int) p2.getX();
         } else {
-            int xStart;
-            int xEnd;
-            int yStart;
-            int yEnd;
+            xEnd = (int) p1.getX();
+            xStart = (int) p2.getX();
+        }
 
-            if (p1.getX() < p2.getX()) {
-                xStart = (int) p1.getX();
-                xEnd = (int) p2.getX();
-            } else {
-                xEnd = (int) p1.getX();
-                xStart = (int) p2.getX();
-            }
+        if (p1.getY() < p2.getY()) {
+            yStart = (int) p1.getY();
+            yEnd = (int) p2.getY();
+        } else {
+            yEnd = (int) p1.getY();
+            yStart = (int) p2.getY();
+        }
 
-            if (p1.getY() < p2.getY()) {
-                yStart = (int) p1.getY();
-                yEnd = (int) p2.getY();
-            } else {
-                yEnd = (int) p1.getY();
-                yStart = (int) p2.getY();
-            }
-
-            for (int y = yStart; y < yEnd; y++) {
-                for (int x = xStart; x < xEnd; x++) {
-                    if (ships.containsKey(new Point(x, y))) {
-                        return true;
-                    }
+        for (int y = yStart; y < yEnd; y++) {
+            for (int x = xStart; x < xEnd; x++) {
+                if (ships.containsKey(new Point(x, y))) {
+                    return true;
                 }
             }
-
         }
         return false;
     }
-
+   
 
     /**
      * Manages if the board of the opponent should also be printed out
