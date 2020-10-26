@@ -57,7 +57,11 @@ public class Playground {
 
     }
 
-    private ArrayList<Point> getCorrectCoordinatesAndPoints(String message) {
+    /**
+     * Used to get two points from the User
+     * @return returns a ArrayList containing two Points
+     */
+    private ArrayList<Point> getCorrectCoordinatesAndPoints() {
         boolean isRegexValid = false;
         Scanner s = new Scanner(System.in);
         ArrayList<Point> pointArrayList = new ArrayList<>();
@@ -66,10 +70,10 @@ public class Playground {
         Point p2 = null;
 
         do {
-            System.out.println(message);
+            System.out.println("Player " + activePlayer + ": Please type in the start and end of the ship eg.[A1 A2]");
             input = s.nextLine();
 
-            if (input.matches("[a-hA-H][1-8]\\s[a-hA-H][1-8]")) {
+            if (input.matches("[a-jA-J][1-10]\\s[a-jA-J][1-10]")) {
                 isRegexValid = true;
                 input = input.toUpperCase();
                 String[] locationAndDestination = input.split(" ");
@@ -90,6 +94,35 @@ public class Playground {
         pointArrayList.add(p2);
 
         return pointArrayList;
+    }
+
+    private Point getCorrectCoordinateAndPoint(String message) {
+        boolean isRegexValid = false;
+        Scanner s = new Scanner(System.in);
+        ArrayList<Point> pointArrayList = new ArrayList<>();
+        String input = "";
+        Point p1 = null;
+
+        do {
+            System.out.println(message);
+            input = s.nextLine();
+
+            if (input.matches("[a-jA-J][1-10]")) {
+                isRegexValid = true;
+                input = input.toUpperCase();
+                String[] locationAndDestination = input.split(" ");
+
+                //Create one points with the entered Coordinate, converts the letter to numbers
+                p1 = new Point(letterMap.get(locationAndDestination[0].charAt(0)),
+                        Integer.parseInt(locationAndDestination[0].substring(1, 2)));
+
+                //End the game if the user entered resign
+            } else if (input.equals("resign")) {
+                isRegexValid = true;
+            }
+        } while (!isRegexValid);
+
+        return p1;
     }
 
 
@@ -140,6 +173,13 @@ public class Playground {
         return false;
     }
 
+
+    /**
+     * Checks if a ship is around the two given points
+     * @param p1
+     * @param p2
+     * @return
+     */
     private boolean isShipAround(Point p1, Point p2) {
         HashMap<Point,Boat> ships = activePlayer == 1 ? shipsPlayer1 : shipsPlayer2;
 
@@ -183,12 +223,40 @@ public class Playground {
 
 
     /**
-     * Print Board Method to Print the Board in the Console.
-     * Replace the Empty Elements with the needed Symboles
+     * Manages if the board of the opponent should also be printed out
+     * @param printOpponent
      */
-    public void printBoard() {
+    public void printManager(boolean printOpponent){
+        if (printOpponent){
+            printBoard(true);
+        }
+        printBoard(false);
+    }
+
+    /**
+     * Print Board Method to Print the Board in the Console.
+     * Replace the Empty Elements with the needed Symbols
+     */
+    private void printBoard(boolean printOpponent) {
         int number = 1;
         char[][] board = new char[10][10];
+
+        if (activePlayer == 1){
+            if (!printOpponent){
+                board = fillCharArray(board, shipsPlayer1, shotsPlayer2, sunkenShipsPlayer1);
+            }else {
+                board = fillCharArray(board, new HashMap<Point, Boat>(), shotsPlayer1, sunkenShipsPlayer2);
+            }
+
+        } else {
+            if (!printOpponent){
+                board = fillCharArray(board, shipsPlayer2, shotsPlayer1, sunkenShipsPlayer1);
+            }else {
+                board = fillCharArray(board, new HashMap<Point, Boat>(), shotsPlayer1, sunkenShipsPlayer1);
+            }
+        }
+
+
         System.out.println(Config.letters);
         System.out.println(Config.tab + Config.line);
         for (int y = 0; y < 10; y++, number++) {
@@ -199,5 +267,28 @@ public class Playground {
             System.out.print(Config.tab + Config.tab + Config.border + "\n");
             System.out.println(Config.tab + Config.line);
         }
+    }
+
+    /**
+     * Fill in the Ships, sunkenShips and shots into the char Array, that gets returned
+     * @param board
+     * @param shipsPlayer2
+     * @param shotsPlayer1
+     * @param sunkenShipsPlayer2
+     * @return
+     */
+    private char[][] fillCharArray(char[][] board, HashMap<Point, Boat> shipsPlayer2, HashMap<Point, Shot> shotsPlayer1, HashMap<Point, Hit> sunkenShipsPlayer2) {
+        for (Point p : shipsPlayer2.keySet()){
+            board[(int) p.getX()][(int) p.getY()] = shipsPlayer2.get(p).getAppearance();
+        }
+
+        for (Point p : shotsPlayer1.keySet()){
+            board[(int) p.getX()][(int) p.getY()] = shotsPlayer1.get(p).getAppearance();
+        }
+
+        for (Point p : sunkenShipsPlayer2.keySet()){
+            board[(int) p.getX()][(int) p.getY()] = sunkenShipsPlayer2.get(p).getAppearance();
+        }
+        return board;
     }
 }

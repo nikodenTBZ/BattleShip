@@ -3,7 +3,7 @@ public class Game {
     public void playGame(){
         Playground playground = new Playground();
         createUser();
-        playground.printBoard();
+        playground.printManager(true);
 
     }
 
