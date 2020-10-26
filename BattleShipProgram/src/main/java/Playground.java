@@ -111,8 +111,7 @@ public class Playground {
             System.out.println("Player " + activePlayer + ": Please type in the start and end of the ship eg.[A1 A2]");
             input = s.nextLine();
 
-            if (input.matches("[a-jA-J][1-10]\\s[a-jA-J][1-10]")) {
-                isRegexValid = true;
+            if (input.matches("[a-jA-J][0-9]+\\s[a-jA-J][0-9]+")) {
                 input = input.toUpperCase();
                 String[] locationAndDestination = input.split(" ");
 
@@ -121,6 +120,10 @@ public class Playground {
                         Integer.parseInt(locationAndDestination[0].substring(1, 2)));
                 p2 = new Point(letterMap.get(locationAndDestination[1].charAt(0)),
                         Integer.parseInt(locationAndDestination[1].substring(1, 2)));
+
+                if (p1.getY() <= 10 && p2.getY() <= 10){
+                    isRegexValid = true;
+                }
 
                 //End the game if the user entered resign
             } else if (input.equals("resign")) {
@@ -134,7 +137,7 @@ public class Playground {
         return pointArrayList;
     }
 
-    private Point getCorrectCoordinateAndPoint(String message) {
+    private Point getCorrectCoordinateAndPoint() {
         boolean isRegexValid = false;
         Scanner s = new Scanner(System.in);
         ArrayList<Point> pointArrayList = new ArrayList<>();
@@ -142,11 +145,10 @@ public class Playground {
         Point p1 = null;
 
         do {
-            System.out.println(message);
+            System.out.println("Player " + activePlayer + ": Please type in the point of the shot eg.[A1]");
             input = s.nextLine();
 
-            if (input.matches("[a-jA-J][1-10]")) {
-                isRegexValid = true;
+            if (input.matches("[a-jA-J][0-9]+")) {
                 input = input.toUpperCase();
                 String[] locationAndDestination = input.split(" ");
 
@@ -154,6 +156,9 @@ public class Playground {
                 p1 = new Point(letterMap.get(locationAndDestination[0].charAt(0)),
                         Integer.parseInt(locationAndDestination[0].substring(1, 2)));
 
+                if (p1.getY() <= 10){
+                    isRegexValid = true;
+                }
                 //End the game if the user entered resign
             } else if (input.equals("resign")) {
                 isRegexValid = true;
@@ -170,9 +175,37 @@ public class Playground {
      * @return
      */
     public boolean shoot(Point p) {
+        if (canShoot(p)){
+            if (activePlayer == 1){
+                shotsPlayer1.put(p, new Shot());
 
+            } else {
+                shotsPlayer2.put(p, new Shot());
+            }
+            checkIfHit(p);
+            return true;
+        }
         return false;
     }
+
+    /**
+     * Checks if on the position of the shot is a Ship, if yes, add it to sunkenShips
+     * @param p
+     */
+    private void checkIfHit(Point p){
+
+        if(activePlayer == 1){
+            if (shipsPlayer2.containsKey(p)){
+                sunkenShipsPlayer2.put(p,new Hit());
+            }
+        } else {
+            if (shipsPlayer1.containsKey(p)){
+                sunkenShipsPlayer1.put(p,new Hit());
+            }
+        }
+    }
+
+
 
     /**
      * Validates if the shoot is valid
