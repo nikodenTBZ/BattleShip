@@ -40,8 +40,8 @@ public class Playground {
         this.sunkenShipsPlayer2 = new HashMap<>();
         this.activePlayer = 1;
         this.availableShipsPlayer1 = new HashMap<>();
-        fillAvailableMaps();
         this.availableShipsPlayer2 = new HashMap<>(availableShipsPlayer1);
+        fillAvailableMaps();
 
     }
 
@@ -74,8 +74,12 @@ public class Playground {
         while (shipLengt > 1) {
             while (availableShipsPlayerX.get(shipLengt) >= 1) {
                 int counterAvaibleShips = availableShipsPlayerX.get(shipLengt);
-                System.out.println("Please type in your Cordinates of the Start point of your Boat with the Lenght " + shipLengt);
+                System.out.println("Please type in your Coordinates of the Start point of your Boat with the Lenght " + shipLengt);
                 ArrayList<Point> coordinateList = getCorrectCoordinatesAndPoints();
+                coordinateList.get(0).setLocation(coordinateList.get(0).getX()-1, coordinateList.get(0).getY()-1);
+                coordinateList.get(1).setLocation(coordinateList.get(1).getX()-1, coordinateList.get(1).getY()-1);
+
+
 
                 if (canPlace(new Point(coordinateList.get(0).x, coordinateList.get(0).y), new Point(coordinateList.get(1).x, coordinateList.get(1).y))) {
                     if (getShipLenght(coordinateList.get(0), coordinateList.get(1)) == shipLengt - 1) {
@@ -91,7 +95,7 @@ public class Playground {
                                 Start = coordinateList.get(0).x;
                                 End = coordinateList.get(1).x;
                             }
-                            while (Start != End) {
+                            while (Start <= End) {
                                 shipsPlayerX.put(new Point(Start, coordinateList.get(0).y), new Boat());
                                 Start++;
                             }
@@ -103,7 +107,7 @@ public class Playground {
                                 Start = coordinateList.get(0).y;
                                 End = coordinateList.get(1).y;
                             }
-                            while (Start != End) {
+                            while (Start <= End) {
                                 shipsPlayerX.put(new Point(coordinateList.get(0).x, Start), new Boat());
                                 Start++;
                             }
@@ -354,9 +358,9 @@ public class Playground {
 
         System.out.println(Config.letters);
         System.out.println(Config.tab + Config.line);
-        for (int y = 0; y < 10; y++, number++) {
+        for (int x = 0; x < 10; x++, number++) {
             System.out.print(number + Config.tab + Config.border);
-            for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
                 System.out.print(Config.tab + board[y][x] + Config.tab + Config.border);
             }
             System.out.print(Config.tab + Config.tab + Config.border + "\n");
