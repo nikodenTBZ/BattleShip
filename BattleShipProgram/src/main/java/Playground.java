@@ -44,48 +44,71 @@ public class Playground {
         this.availableShipsPlayer2 = new HashMap<>(availableShipsPlayer1);
 
     }
-    public void fillAvailableMaps(){
-        availableShipsPlayer1.put(5,1);
-        availableShipsPlayer1.put(4,2);
-        availableShipsPlayer1.put(3,3);
-        availableShipsPlayer1.put(2,4);
+
+    public void fillAvailableMaps() {
+        availableShipsPlayer1.put(5, 1);
+        availableShipsPlayer1.put(4, 2);
+        availableShipsPlayer1.put(3, 3);
+        availableShipsPlayer1.put(2, 4);
     }
 
     public void placeShips() {
 
 
         HashMap<Integer, Integer> availableShipsPlayerX;
+        HashMap<Point, Boat> shipsPlayerX;
         int shipLengt = 5;
         if (activePlayer == 1) {
             availableShipsPlayerX = availableShipsPlayer1;
+            shipsPlayerX = shipsPlayer1;
         } else {
             availableShipsPlayerX = availableShipsPlayer2;
+            shipsPlayerX = shipsPlayer2;
         }
-        while (availableShipsPlayerX.get(5) <= 1) {
-            int counterAvaibleShips = availableShipsPlayerX.get(5);
-            System.out.println("Please type in your Cordinates of the Start point of your Boat with the Lenght" + shipLengt);
 
-            if(getShipLenght(getCorrectCoordinatesAndPoints().get(0), getCorrectCoordinatesAndPoints().get(1)) == 5)
+        while (shipLengt > 1) {
+            while (availableShipsPlayerX.get(shipLengt) >= 1) {
+                int counterAvaibleShips = availableShipsPlayerX.get(shipLengt);
+                System.out.println("Please type in your Cordinates of the Start point of your Boat with the Lenght" + shipLengt);
+                ArrayList<Point> coordinateList = getCorrectCoordinatesAndPoints();
+                if (getShipLenght(coordinateList.get(0), coordinateList.get(1)) == shipLengt - 1) {
 
-                availableShipsPlayerX.put(5, counterAvaibleShips--);
-        }
-        shipLengt--;
-        while (availableShipsPlayerX.get(4) <= 1) {
-            int counterAvaibleShips = availableShipsPlayerX.get(4);
-            System.out.println("Please type in your Cordinates of the Start point of your Boat with the Lenght" + shipLengt);
-            availableShipsPlayerX.put(4, counterAvaibleShips--);
-        }
-        shipLengt--;
-        while (availableShipsPlayerX.get(3) <= 1) {
-            int counterAvaibleShips = availableShipsPlayerX.get(3);
-            System.out.println("Please type in your Cordinates of the Start point of your Boat with the Lenght" + shipLengt);
-            availableShipsPlayerX.put(3, counterAvaibleShips--);
-        }
-        shipLengt--;
-        while (availableShipsPlayerX.get(2) <= 1) {
-            int counterAvaibleShips = availableShipsPlayerX.get(2);
-            System.out.println("Please type in your Cordinates of the Start point of your Boat with the Lenght" + shipLengt);
-            availableShipsPlayerX.put(2, counterAvaibleShips--);
+                    int End = 0;
+                    int Start = 0;
+
+                    if (coordinateList.get(0).x != coordinateList.get(1).x) {
+                        if (coordinateList.get(0).x < coordinateList.get(1).x) {
+                            Start = coordinateList.get(0).x;
+                            End = coordinateList.get(1).x;
+                        } else {
+                            Start = coordinateList.get(0).x;
+                            End = coordinateList.get(1).x;
+                        }
+                        while (Start != End) {
+                            shipsPlayerX.put(new Point(Start, coordinateList.get(0).y), new Boat());
+                            Start++;
+                        }
+                    } else if (coordinateList.get(0).y != coordinateList.get(1).y) {
+                        if (coordinateList.get(0).y < coordinateList.get(1).y) {
+                            Start = coordinateList.get(0).y;
+                            End = coordinateList.get(1).y;
+                        } else {
+                            Start = coordinateList.get(0).y;
+                            End = coordinateList.get(1).y;
+                        }
+                        while (Start != End) {
+                            shipsPlayerX.put(new Point(coordinateList.get(0).x, Start), new Boat());
+                            Start++;
+                        }
+                    }
+
+                    availableShipsPlayerX.put(shipLengt, --counterAvaibleShips);
+                    printManager(false);
+                } else {
+                    System.out.println("Please type in correct Coordinates");
+                }
+            }
+            shipLengt--;
         }
     }
 
@@ -97,6 +120,7 @@ public class Playground {
 
     /**
      * Used to get two points from the User
+     *
      * @return returns a ArrayList containing two Points
      */
     private ArrayList<Point> getCorrectCoordinatesAndPoints() {
@@ -166,6 +190,7 @@ public class Playground {
 
     /**
      * Checks if the shoot is valid and then applies it
+     *
      * @param p
      * @return
      */
@@ -176,23 +201,24 @@ public class Playground {
 
     /**
      * Validates if the shoot is valid
+     *
      * @param p
      * @return
      */
     private boolean canShoot(Point p) {
 
-        if (activePlayer == 1){
-            if (shotsPlayer1.containsKey(p)){
+        if (activePlayer == 1) {
+            if (shotsPlayer1.containsKey(p)) {
                 return false;
             } else {
-                shotsPlayer1.put(p,new Shot());
+                shotsPlayer1.put(p, new Shot());
                 return true;
             }
-        } else if (activePlayer == 2){
-            if (shotsPlayer2.containsKey(p)){
+        } else if (activePlayer == 2) {
+            if (shotsPlayer2.containsKey(p)) {
                 return false;
             } else {
-                shotsPlayer2.put(p,new Shot());
+                shotsPlayer2.put(p, new Shot());
                 return true;
             }
         }
@@ -200,12 +226,11 @@ public class Playground {
         return false;
     }
 
-    private boolean canPlace(Point p1, Point p2){
+    private boolean canPlace(Point p1, Point p2) {
 
-        if (!isShipAround(p1,p2)){
+        if (!isShipAround(p1, p2)) {
 
         }
-
 
 
         return false;
@@ -214,12 +239,13 @@ public class Playground {
 
     /**
      * Checks if a ship is around the two given points
+     *
      * @param p1
      * @param p2
      * @return
      */
     private boolean isShipAround(Point p1, Point p2) {
-        HashMap<Point,Boat> ships = activePlayer == 1 ? shipsPlayer1 : shipsPlayer2;
+        HashMap<Point, Boat> ships = activePlayer == 1 ? shipsPlayer1 : shipsPlayer2;
 
         //Checks if the ship is placed horizontal
         if (p1.getX() == p2.getX()) {
@@ -262,10 +288,11 @@ public class Playground {
 
     /**
      * Manages if the board of the opponent should also be printed out
+     *
      * @param printOpponent
      */
-    public void printManager(boolean printOpponent){
-        if (printOpponent){
+    public void printManager(boolean printOpponent) {
+        if (printOpponent) {
             printBoard(true);
         }
         printBoard(false);
@@ -279,17 +306,17 @@ public class Playground {
         int number = 1;
         char[][] board = new char[10][10];
 
-        if (activePlayer == 1){
-            if (!printOpponent){
+        if (activePlayer == 1) {
+            if (!printOpponent) {
                 board = fillCharArray(board, shipsPlayer1, shotsPlayer2, sunkenShipsPlayer1);
-            }else {
+            } else {
                 board = fillCharArray(board, new HashMap<Point, Boat>(), shotsPlayer1, sunkenShipsPlayer2);
             }
 
         } else {
-            if (!printOpponent){
+            if (!printOpponent) {
                 board = fillCharArray(board, shipsPlayer2, shotsPlayer1, sunkenShipsPlayer1);
-            }else {
+            } else {
                 board = fillCharArray(board, new HashMap<Point, Boat>(), shotsPlayer1, sunkenShipsPlayer1);
             }
         }
@@ -309,6 +336,7 @@ public class Playground {
 
     /**
      * Fill in the Ships, sunkenShips and shots into the char Array, that gets returned
+     *
      * @param board
      * @param shipsPlayer2
      * @param shotsPlayer1
@@ -316,15 +344,15 @@ public class Playground {
      * @return
      */
     private char[][] fillCharArray(char[][] board, HashMap<Point, Boat> shipsPlayer2, HashMap<Point, Shot> shotsPlayer1, HashMap<Point, Hit> sunkenShipsPlayer2) {
-        for (Point p : shipsPlayer2.keySet()){
+        for (Point p : shipsPlayer2.keySet()) {
             board[(int) p.getX()][(int) p.getY()] = shipsPlayer2.get(p).getAppearance();
         }
 
-        for (Point p : shotsPlayer1.keySet()){
+        for (Point p : shotsPlayer1.keySet()) {
             board[(int) p.getX()][(int) p.getY()] = shotsPlayer1.get(p).getAppearance();
         }
 
-        for (Point p : sunkenShipsPlayer2.keySet()){
+        for (Point p : sunkenShipsPlayer2.keySet()) {
             board[(int) p.getX()][(int) p.getY()] = sunkenShipsPlayer2.get(p).getAppearance();
         }
         return board;
