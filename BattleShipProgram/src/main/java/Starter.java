@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class Starter {
     //Name:     BattleShip TUI Project
     //Author:   Dennis & Nikolai
@@ -5,7 +7,6 @@ public class Starter {
     public static void main(String[] args) {
            Game game = new Game();
            game.playGame();
-
 
     }
 }
