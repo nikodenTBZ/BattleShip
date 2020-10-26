@@ -45,7 +45,7 @@ public class Playground {
 
     }
 
-    public void fillAvailableMaps() {
+    private void fillAvailableMaps() {
         availableShipsPlayer1.put(5, 1);
         availableShipsPlayer1.put(4, 2);
         availableShipsPlayer1.put(3, 3);
@@ -112,7 +112,7 @@ public class Playground {
         }
     }
 
-    public double getShipLenght(Point p1, Point p2) {
+    private double getShipLenght(Point p1, Point p2) {
 
         double distance = p1.distance(p2);
         return distance;
@@ -145,7 +145,7 @@ public class Playground {
                 p2 = new Point(letterMap.get(locationAndDestination[1].charAt(0)),
                         Integer.parseInt(locationAndDestination[1].substring(1, 2)));
 
-                if (p1.getY() <= 10 && p2.getY() <= 10){
+                if (p1.getY() <= 10 && p2.getY() <= 10) {
                     isRegexValid = true;
                 }
 
@@ -180,7 +180,7 @@ public class Playground {
                 p1 = new Point(letterMap.get(locationAndDestination[0].charAt(0)),
                         Integer.parseInt(locationAndDestination[0].substring(1, 2)));
 
-                if (p1.getY() <= 10){
+                if (p1.getY() <= 10) {
                     isRegexValid = true;
                 }
                 //End the game if the user entered resign
@@ -196,14 +196,13 @@ public class Playground {
     /**
      * Checks if the shoot is valid and then applies it
      *
-     * @param p
-     * @return
+     * @return a boolean if the shot was successfully
      */
-    public boolean shoot(Point p) {
-        if (canShoot(p)){
-            if (activePlayer == 1){
+    public boolean shoot() {
+        Point p = getCorrectCoordinateAndPoint();
+        if (canShoot(p)) {
+            if (activePlayer == 1) {
                 shotsPlayer1.put(p, new Shot());
-
             } else {
                 shotsPlayer2.put(p, new Shot());
             }
@@ -215,21 +214,21 @@ public class Playground {
 
     /**
      * Checks if on the position of the shot is a Ship, if yes, add it to sunkenShips
+     *
      * @param p
      */
-    private void checkIfHit(Point p){
+    private void checkIfHit(Point p) {
 
-        if(activePlayer == 1){
-            if (shipsPlayer2.containsKey(p)){
-                sunkenShipsPlayer2.put(p,new Hit());
+        if (activePlayer == 1) {
+            if (shipsPlayer2.containsKey(p)) {
+                sunkenShipsPlayer2.put(p, new Hit());
             }
         } else {
-            if (shipsPlayer1.containsKey(p)){
-                sunkenShipsPlayer1.put(p,new Hit());
+            if (shipsPlayer1.containsKey(p)) {
+                sunkenShipsPlayer1.put(p, new Hit());
             }
         }
     }
-
 
 
     /**
@@ -389,5 +388,24 @@ public class Playground {
             board[(int) p.getX()][(int) p.getY()] = sunkenShipsPlayer2.get(p).getAppearance();
         }
         return board;
+    }
+
+    public boolean hasWon() {
+
+        for (Point p : shipsPlayer1.keySet()){
+            if (!sunkenShipsPlayer1.containsKey(p)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public int getActivePlayer() {
+        return activePlayer;
+    }
+
+    public void setActivePlayer(int activePlayer) {
+        this.activePlayer = activePlayer;
     }
 }
