@@ -74,7 +74,7 @@ public class Playground {
         while (shipLengt > 1) {
             while (availableShipsPlayerX.get(shipLengt) >= 1) {
                 int counterAvaibleShips = availableShipsPlayerX.get(shipLengt);
-                System.out.println("Please type in your Cordinates of the Start point of your Boat with the Lenght" + shipLengt);
+                System.out.println("Please type in your Cordinates of the Start point of your Boat with the Lenght " + shipLengt);
                 ArrayList<Point> coordinateList = getCorrectCoordinatesAndPoints();
 
                 if (canPlace(new Point(coordinateList.get(0).x, coordinateList.get(0).y), new Point(coordinateList.get(1).x, coordinateList.get(1).y))) {
