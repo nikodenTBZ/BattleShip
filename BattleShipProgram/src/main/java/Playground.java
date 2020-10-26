@@ -45,7 +45,7 @@ public class Playground {
 
     }
 
-    public void fillAvailableMaps() {
+    private void fillAvailableMaps() {
         availableShipsPlayer1.put(5, 1);
         availableShipsPlayer1.put(4, 2);
         availableShipsPlayer1.put(3, 3);
@@ -112,7 +112,7 @@ public class Playground {
         }
     }
 
-    public double getShipLenght(Point p1, Point p2) {
+    private double getShipLenght(Point p1, Point p2) {
 
         double distance = p1.distance(p2);
         return distance;
@@ -196,14 +196,13 @@ public class Playground {
     /**
      * Checks if the shoot is valid and then applies it
      *
-     * @param p
-     * @return
+     * @return a boolean if the shot was successfully
      */
-    public boolean shoot(Point p) {
+    public boolean shoot() {
+        Point p = getCorrectCoordinateAndPoint();
         if (canShoot(p)) {
             if (activePlayer == 1) {
                 shotsPlayer1.put(p, new Shot());
-
             } else {
                 shotsPlayer2.put(p, new Shot());
             }
@@ -379,5 +378,24 @@ public class Playground {
             board[(int) p.getX()][(int) p.getY()] = sunkenShipsPlayer2.get(p).getAppearance();
         }
         return board;
+    }
+
+    public boolean hasWon() {
+
+        for (Point p : shipsPlayer1.keySet()){
+            if (!sunkenShipsPlayer1.containsKey(p)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public int getActivePlayer() {
+        return activePlayer;
+    }
+
+    public void setActivePlayer(int activePlayer) {
+        this.activePlayer = activePlayer;
     }
 }
