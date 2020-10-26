@@ -54,7 +54,45 @@ public class Playground {
     public void placeShips() {
 
 
+        HashMap<Integer, Integer> availableShipsPlayerX;
+        int shipLengt = 5;
+        if (activePlayer == 1) {
+            availableShipsPlayerX = availableShipsPlayer1;
+        } else {
+            availableShipsPlayerX = availableShipsPlayer2;
+        }
+        while (availableShipsPlayerX.get(5) <= 1) {
+            int counterAvaibleShips = availableShipsPlayerX.get(5);
+            System.out.println("Please type in your Cordinates of the Start point of your Boat with the Lenght" + shipLengt);
 
+            if(getShipLenght(getCorrectCoordinatesAndPoints().get(0), getCorrectCoordinatesAndPoints().get(1)) == 5)
+
+                availableShipsPlayerX.put(5, counterAvaibleShips--);
+        }
+        shipLengt--;
+        while (availableShipsPlayerX.get(4) <= 1) {
+            int counterAvaibleShips = availableShipsPlayerX.get(4);
+            System.out.println("Please type in your Cordinates of the Start point of your Boat with the Lenght" + shipLengt);
+            availableShipsPlayerX.put(4, counterAvaibleShips--);
+        }
+        shipLengt--;
+        while (availableShipsPlayerX.get(3) <= 1) {
+            int counterAvaibleShips = availableShipsPlayerX.get(3);
+            System.out.println("Please type in your Cordinates of the Start point of your Boat with the Lenght" + shipLengt);
+            availableShipsPlayerX.put(3, counterAvaibleShips--);
+        }
+        shipLengt--;
+        while (availableShipsPlayerX.get(2) <= 1) {
+            int counterAvaibleShips = availableShipsPlayerX.get(2);
+            System.out.println("Please type in your Cordinates of the Start point of your Boat with the Lenght" + shipLengt);
+            availableShipsPlayerX.put(2, counterAvaibleShips--);
+        }
+    }
+
+    public double getShipLenght(Point p1, Point p2) {
+
+        double distance = p1.distance(p2);
+        return distance;
     }
 
     /**
