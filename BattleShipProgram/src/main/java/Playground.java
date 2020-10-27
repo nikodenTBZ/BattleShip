@@ -119,8 +119,8 @@ public class Playground {
                         System.out.println("Please type in correct Coordinates");
                     }
                 }
-                shipLengt--;
             }
+            shipLengt--;
         }
     }
 
@@ -309,8 +309,9 @@ public class Playground {
             yStart = (int) p2.getY();
         }
 
-        for (int y = yStart; y < yEnd; y++) {
-            for (int x = xStart; x < xEnd; x++) {
+        //TODO
+        for (int x = xStart; x < xEnd; x++) {
+            for (int y = yStart; y < yEnd; y++) {
                 if (ships.containsKey(new Point(x, y))) {
                     return true;
                 }
