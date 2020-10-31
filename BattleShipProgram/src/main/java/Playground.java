@@ -92,8 +92,8 @@ public class Playground {
                                 Start = coordinateList.get(0).x;
                                 End = coordinateList.get(1).x;
                             } else {
-                                Start = coordinateList.get(0).x;
-                                End = coordinateList.get(1).x;
+                                Start = coordinateList.get(1).x;
+                                End = coordinateList.get(0).x;
                             }
                             while (Start <= End) {
                                 shipsPlayerX.put(new Point(Start, coordinateList.get(0).y), new Boat());
@@ -104,8 +104,8 @@ public class Playground {
                                 Start = coordinateList.get(0).y;
                                 End = coordinateList.get(1).y;
                             } else {
-                                Start = coordinateList.get(0).y;
-                                End = coordinateList.get(1).y;
+                                Start = coordinateList.get(1).y;
+                                End = coordinateList.get(0).y;
                             }
                             while (Start <= End) {
                                 shipsPlayerX.put(new Point(coordinateList.get(0).x, Start), new Boat());
@@ -132,7 +132,8 @@ public class Playground {
 
     private boolean canPlace(Point p1, Point p2) {
 
-        return !isShipAround(p1, p2);
+        boolean canPlace = !isShipAround(p1, p2);
+        return canPlace;
     }
 
     /**
@@ -157,12 +158,25 @@ public class Playground {
                 String[] locationAndDestination = input.split(" ");
 
                 //Create two points with the entered Coordinates, converts the letters to numbers
-                p1 = new Point(letterMap.get(locationAndDestination[0].charAt(0)),
-                        Integer.parseInt(locationAndDestination[0].substring(1, 2)));
-                p2 = new Point(letterMap.get(locationAndDestination[1].charAt(0)),
-                        Integer.parseInt(locationAndDestination[1].substring(1, 2)));
+                //Check if the Y number is 1 or 2 digits
+                if (locationAndDestination[0].length() == 2){
+                    p1 = new Point(letterMap.get(locationAndDestination[0].charAt(0)),
+                            Integer.parseInt(locationAndDestination[0].substring(1, 2)));
+                } else {
+                    p1 = new Point(letterMap.get(locationAndDestination[0].charAt(0)),
+                            Integer.parseInt(locationAndDestination[0].substring(1, 3)));
+                }
 
-                if (p1.getY() <= 10 && p2.getY() <= 10) {
+                //Check if the Y number is 1 or 2 digits
+                if (locationAndDestination[1].length() == 2){
+                    p2 = new Point(letterMap.get(locationAndDestination[1].charAt(0)),
+                            Integer.parseInt(locationAndDestination[1].substring(1, 2)));
+                } else {
+                    p2 = new Point(letterMap.get(locationAndDestination[1].charAt(0)),
+                            Integer.parseInt(locationAndDestination[1].substring(1, 3)));
+                }
+
+                if (p1.getY() <= 10 && p1.getX() <= 10 && p2.getY() <= 10 && p2.getX() <= 10) {
                     isRegexValid = true;
                 }
 
@@ -197,7 +211,7 @@ public class Playground {
                 p1 = new Point(letterMap.get(locationAndDestination[0].charAt(0)),
                         Integer.parseInt(locationAndDestination[0].substring(1, 2)));
 
-                if (p1.getY() <= 10) {
+                if (p1.getY() <= 10 && p1.getX() <= 10) {
                     isRegexValid = true;
                 }
                 //End the game if the user entered resign
@@ -309,9 +323,15 @@ public class Playground {
             yStart = (int) p2.getY();
         }
 
+        //Lower the number by 1
+        xStart = xStart != 0 ? --xStart : xStart;
+        yStart = yStart != 0 ? --yStart : yStart;
+        xEnd = xEnd != 9 ? ++xEnd : xEnd;
+        yEnd = yEnd != 9 ? ++yEnd : yEnd;
+
         //TODO
-        for (int x = xStart; x < xEnd; x++) {
-            for (int y = yStart; y < yEnd; y++) {
+        for (int x = xStart; x <= xEnd; x++) {
+            for (int y = yStart; y <= yEnd; y++) {
                 if (ships.containsKey(new Point(x, y))) {
                     return true;
                 }
