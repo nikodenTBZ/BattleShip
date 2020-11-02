@@ -59,7 +59,6 @@ public class Playground {
 
     public void placeShips() {
 
-
         HashMap<Integer, Integer> availableShipsPlayerX;
         HashMap<Point, Boat> shipsPlayerX;
         int shipLengt = 5;
