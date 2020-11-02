@@ -9,6 +9,10 @@ import java.time.LocalDateTime;
  import static Tools.Constants.*;
 
  public class FileManager {
+     /**
+      * Writes the winner in to a txt file
+      * @param winner
+      */
     public void saveWinnerInFile(String winner) {
 
         LocalDateTime localDateTime = LocalDateTime.now();
