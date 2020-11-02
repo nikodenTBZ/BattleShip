@@ -3,20 +3,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
 import static Tools.Constants.*;
 
 public class Playground extends Game {
 
     public Map<Character, Integer> letterMap = new HashMap<>();
-    private HashMap<Point, Boat> shipsPlayer1;
-    private HashMap<Point, Boat> shipsPlayer2;
-    private HashMap<Point, Shot> shotsPlayer1;
-    private HashMap<Point, Shot> shotsPlayer2;
-    private HashMap<Point, Hit> sunkenShipsPlayer1;
-    private HashMap<Point, Hit> sunkenShipsPlayer2;
+    private final HashMap<Point, Boat> shipsPlayer1;
+    private final HashMap<Point, Boat> shipsPlayer2;
+    private final HashMap<Point, Shot> shotsPlayer1;
+    private final HashMap<Point, Shot> shotsPlayer2;
+    private final HashMap<Point, Hit> sunkenShipsPlayer1;
+    private final HashMap<Point, Hit> sunkenShipsPlayer2;
     private int activePlayer;
-    private HashMap<Integer, Integer> availableShipsPlayer1;
-    private HashMap<Integer, Integer> availableShipsPlayer2;
+    private final HashMap<Integer, Integer> availableShipsPlayer1;
+    private final HashMap<Integer, Integer> availableShipsPlayer2;
 
 
     {
@@ -76,9 +77,8 @@ public class Playground extends Game {
                 int counterAvaibleShips = availableShipsPlayerX.get(shipLengt);
                 System.out.println(TYPEINCOORDINATES + shipLengt);
                 ArrayList<Point> coordinateList = getCorrectCoordinatesAndPoints();
-                coordinateList.get(0).setLocation(coordinateList.get(0).getX()-1, coordinateList.get(0).getY()-1);
-                coordinateList.get(1).setLocation(coordinateList.get(1).getX()-1, coordinateList.get(1).getY()-1);
-
+                coordinateList.get(0).setLocation(coordinateList.get(0).getX() - 1, coordinateList.get(0).getY() - 1);
+                coordinateList.get(1).setLocation(coordinateList.get(1).getX() - 1, coordinateList.get(1).getY() - 1);
 
 
                 if (canPlace(new Point(coordinateList.get(0).x, coordinateList.get(0).y), new Point(coordinateList.get(1).x, coordinateList.get(1).y))) {
@@ -159,7 +159,7 @@ public class Playground extends Game {
 
                 //Create two points with the entered Coordinates, converts the LETTERS to numbers
                 //Check if the Y number is 1 or 2 digits
-                if (locationAndDestination[0].length() == 2){
+                if (locationAndDestination[0].length() == 2) {
                     p1 = new Point(letterMap.get(locationAndDestination[0].charAt(0)),
                             Integer.parseInt(locationAndDestination[0].substring(1, 2)));
                 } else {
@@ -168,7 +168,7 @@ public class Playground extends Game {
                 }
 
                 //Check if the Y number is 1 or 2 digits
-                if (locationAndDestination[1].length() == 2){
+                if (locationAndDestination[1].length() == 2) {
                     p2 = new Point(letterMap.get(locationAndDestination[1].charAt(0)),
                             Integer.parseInt(locationAndDestination[1].substring(1, 2)));
                 } else {
@@ -208,7 +208,7 @@ public class Playground extends Game {
 
                 //Create one points with the entered Coordinate, converts the letter to numbers
                 //Check if the Y number is 1 or 2 digits
-                if (input.length() == 2){
+                if (input.length() == 2) {
                     p1 = new Point(letterMap.get(input.charAt(0)),
                             Integer.parseInt(input.substring(1, 2)));
                 } else {
@@ -238,21 +238,22 @@ public class Playground extends Game {
         Point p;
         do {
             p = getCorrectCoordinateAndPoint();
-            p.setLocation(p.getX()-1,p.getY()-1);
+            p.setLocation(p.getX() - 1, p.getY() - 1);
         } while (!canShoot(p));
 
-            if (activePlayer == 1) {
-                shotsPlayer1.put(p, new Shot());
-            } else {
-                shotsPlayer2.put(p, new Shot());
-            }
+        if (activePlayer == 1) {
+            shotsPlayer1.put(p, new Shot());
+        } else {
+            shotsPlayer2.put(p, new Shot());
+        }
 
-            return checkIfHit(p);
+        return checkIfHit(p);
 
     }
 
     /**
      * Checks if on the position of the shot is a Ship, if yes, add it to sunkenShips
+     *
      * @param p
      * @return
      */
@@ -384,7 +385,7 @@ public class Playground extends Game {
 
         } else {
             if (!printOpponent) {
-                        System.out.println("Player 2: My Ships and Opponents Shots/Hits");
+                System.out.println("Player 2: My Ships and Opponents Shots/Hits");
                 board = fillCharArray(board, shipsPlayer2, shotsPlayer1, sunkenShipsPlayer2);
             } else {
                 System.out.println("Player 1: My Shots and Hits");
@@ -430,17 +431,14 @@ public class Playground extends Game {
 
     /**
      * Checks if a player has won
+     *
      * @return
      */
     public boolean hasWon() {
-        HashMap<Point,Boat> ships = activePlayer == 2 ? shipsPlayer2 : shipsPlayer1;
-        HashMap<Point,Hit> sunkenShips = activePlayer == 2 ? sunkenShipsPlayer2 : sunkenShipsPlayer1;
+        HashMap<Point, Boat> ships = activePlayer == 2 ? shipsPlayer2 : shipsPlayer1;
+        HashMap<Point, Hit> sunkenShips = activePlayer == 2 ? sunkenShipsPlayer2 : sunkenShipsPlayer1;
 
-        if (ships.size() == sunkenShips.size()){
-            return true;
-        }
-
-        return false;
+        return ships.size() == sunkenShips.size();
     }
 
     public int getActivePlayer() {
