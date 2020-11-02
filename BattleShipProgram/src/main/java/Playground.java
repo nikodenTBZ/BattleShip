@@ -413,10 +413,21 @@ public class Playground {
         return board;
     }
 
+
+    /**
+     * Checks if a player has won
+     * @return
+     */
     public boolean hasWon() {
 
         for (Point p : shipsPlayer1.keySet()) {
             if (!sunkenShipsPlayer1.containsKey(p)) {
+                return false;
+            }
+        }
+
+        for (Point p : shipsPlayer2.keySet()) {
+            if (!sunkenShipsPlayer2.containsKey(p)) {
                 return false;
             }
         }
