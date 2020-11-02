@@ -19,6 +19,7 @@ public class Constants {
     public static String P2WON = "Player 2 has won";
     public static String USERNAMEP1 = "Please type in a username for player 1";
     public static String USERNAMEP2 = "Please type in a username for player 2";
+    public static String FILEERROR = "Could not write in file";
     public static String SPACE = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 
 

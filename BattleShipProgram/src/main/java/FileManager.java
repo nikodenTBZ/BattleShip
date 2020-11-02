@@ -7,7 +7,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
 
+
 public class FileManager {
+    /**
+     * Writes the winner in a file
+     * @param winner
+     */
     public void saveWinnerInFile(String winner) {
         
         try (FileWriter fw = new FileWriter("winnerLog.txt", true);

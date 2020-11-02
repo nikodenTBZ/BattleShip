@@ -4,6 +4,10 @@ import static Tools.Constants.*;
 
 public class Game {
 
+
+    /**
+     * The main logic of the game
+     */
     public void playGame() {
         Playground playground = new Playground();
 
@@ -49,15 +53,28 @@ public class Game {
 
         if (playground.getActivePlayer() == 1) {
             System.out.println(P2WON);
-            new FileManager().saveWinnerInFile("Player 2");
+            try {
+                new FileManager().saveWinnerInFile("Player 2");
+            } catch (CouldNotWriteException e){
+                System.out.println(FILEERROR);
+            }
         } else {
             System.out.println(P1WON);
-            new FileManager().saveWinnerInFile("Player 1");
+
+            try {
+                new FileManager().saveWinnerInFile("Player 1");
+
+            } catch (CouldNotWriteException e){
+                System.out.println(FILEERROR);
+            }
 
         }
 
     }
 
+    /**
+     * Creates the users
+     */
     public void createUser() {
         Scanner s = new Scanner(System.in);
         System.out.println(USERNAMEP1);
@@ -69,6 +86,9 @@ public class Game {
         Player player2 = new Player(username2);
     }
 
+    /**
+     * Prints the spaces to hide the playground
+     */
     public void printSpace() {
         System.out.println(SPACE);
     }
