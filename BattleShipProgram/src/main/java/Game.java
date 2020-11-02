@@ -3,7 +3,6 @@ import static Tools.Constants.*;
 
 public class Game {
 
-
     public void playGame() {
         Playground playground = new Playground();
 
@@ -49,8 +48,11 @@ public class Game {
 
         if (playground.getActivePlayer() == 1) {
             System.out.println(P2WON);
+            new FileManager().saveWinnerInFile("Player 2");
         } else {
             System.out.println(P1WON);
+            new FileManager().saveWinnerInFile("Player 1");
+
         }
 
     }

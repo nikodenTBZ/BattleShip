@@ -428,22 +428,19 @@ public class Playground extends Game {
         return board;
     }
 
-//TODO
     /**
      * Checks if a player has won
      * @return
      */
     public boolean hasWon() {
-        HashMap<Point,Boat> ships = activePlayer == 1 ? shipsPlayer2 : shipsPlayer1;
-        HashMap<Point,Hit> sunkenShips = activePlayer == 1 ? sunkenShipsPlayer2 : sunkenShipsPlayer1;
+        HashMap<Point,Boat> ships = activePlayer == 2 ? shipsPlayer2 : shipsPlayer1;
+        HashMap<Point,Hit> sunkenShips = activePlayer == 2 ? sunkenShipsPlayer2 : sunkenShipsPlayer1;
 
-        for (Point p : ships.keySet()) {
-            if (!sunkenShips.containsKey(p)) {
-                return false;
-            }
+        if (ships.size() == sunkenShips.size()){
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     public int getActivePlayer() {
