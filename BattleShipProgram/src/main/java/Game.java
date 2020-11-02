@@ -13,10 +13,21 @@ public class Game {
         playground.printManager(false);
         playground.placeShips();
         playground.setActivePlayer(1);
-
+        printSpace();
         while (!playground.hasWon()) {
-            playground.shoot();
             playground.printManager(true);
+
+
+            boolean successful = false;
+            do {
+                successful = playground.shoot();
+                playground.printManager(true);
+                if (successful){
+                    System.out.println("Hit");
+                } else {
+                    System.out.println("No hit");
+                }
+            } while (successful);
 
             if (playground.getActivePlayer() == 1) {
                 playground.setActivePlayer(2);
@@ -24,10 +35,13 @@ public class Game {
                 playground.setActivePlayer(1);
             }
 
+            //Newlines to hide the board of the enemy
+            printSpace();
+
             System.out.println("Player: " + playground.getActivePlayer() + " please type \"ok\" if ready");
             String ok = s.nextLine();
-            //Newlines to hide the board of the enemy
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+
+
         }
 
         if (playground.getActivePlayer() == 1) {
@@ -47,6 +61,10 @@ public class Game {
 
         Player player1 = new Player(username1);
         Player player2 = new Player(username2);
+    }
+
+    public void printSpace() {
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
 }

@@ -230,35 +230,41 @@ public class Playground {
      * @return a boolean if the shot was successfully
      */
     public boolean shoot() {
-        Point p = getCorrectCoordinateAndPoint();
-        if (canShoot(p)) {
+        Point p;
+        do {
+            p = getCorrectCoordinateAndPoint();
+            p.setLocation(p.getX()-1,p.getY()-1);
+        } while (!canShoot(p));
+
             if (activePlayer == 1) {
                 shotsPlayer1.put(p, new Shot());
             } else {
                 shotsPlayer2.put(p, new Shot());
             }
-            checkIfHit(p);
-            return true;
-        }
-        return false;
+
+            return checkIfHit(p);
+
     }
 
     /**
      * Checks if on the position of the shot is a Ship, if yes, add it to sunkenShips
-     *
      * @param p
+     * @return
      */
-    private void checkIfHit(Point p) {
+    private boolean checkIfHit(Point p) {
 
         if (activePlayer == 1) {
             if (shipsPlayer2.containsKey(p)) {
                 sunkenShipsPlayer2.put(p, new Hit());
+                return true;
             }
         } else {
             if (shipsPlayer1.containsKey(p)) {
                 sunkenShipsPlayer1.put(p, new Hit());
+                return true;
             }
         }
+        return false;
     }
 
 
@@ -370,9 +376,9 @@ public class Playground {
 
         } else {
             if (!printOpponent) {
-                board = fillCharArray(board, shipsPlayer2, shotsPlayer1, sunkenShipsPlayer1);
+                board = fillCharArray(board, shipsPlayer2, shotsPlayer1, sunkenShipsPlayer2);
             } else {
-                board = fillCharArray(board, new HashMap<Point, Boat>(), shotsPlayer1, sunkenShipsPlayer1);
+                board = fillCharArray(board, new HashMap<Point, Boat>(), shotsPlayer2, sunkenShipsPlayer1);
             }
         }
 
