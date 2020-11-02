@@ -15,6 +15,13 @@ public class Constants {
     public static String BORDER = "│";
     public static String LETTERS = "\t\tA\t\tB\t\tC\t\tD\t\tE\t\tF\t\tG\t\tH\t\tI\t\tJ";
     public static String TAB = "\t";
+    public static String P1WON = "Player 1 has won";
+    public static String P2WON = "Player 2 has won";
+    public static String USERNAMEP1 = "Please type in a username for player 1";
+    public static String USERNAMEP2 = "Please type in a username for player 2";
+    public static String SPACE = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+
+
 
 
 
