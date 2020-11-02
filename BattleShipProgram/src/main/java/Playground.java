@@ -256,11 +256,13 @@ public class Playground extends Game {
         if (activePlayer == 1) {
             if (shipsPlayer2.containsKey(p)) {
                 sunkenShipsPlayer2.put(p, new Hit());
+                shipsPlayer2.remove(p);
                 return true;
             }
         } else {
             if (shipsPlayer1.containsKey(p)) {
                 sunkenShipsPlayer1.put(p, new Hit());
+                shipsPlayer1.remove(p);
                 return true;
             }
         }
@@ -335,7 +337,6 @@ public class Playground extends Game {
         xEnd = xEnd != 9 ? ++xEnd : xEnd;
         yEnd = yEnd != 9 ? ++yEnd : yEnd;
 
-        //TODO
         for (int x = xStart; x <= xEnd; x++) {
             for (int y = yStart; y <= yEnd; y++) {
                 if (ships.containsKey(new Point(x, y))) {
@@ -419,21 +420,17 @@ public class Playground extends Game {
         return board;
     }
 
-
+//TODO
     /**
      * Checks if a player has won
      * @return
      */
     public boolean hasWon() {
+        HashMap<Point,Boat> ships = activePlayer == 1 ? shipsPlayer2 : shipsPlayer1;
+        HashMap<Point,Hit> sunkenShips = activePlayer == 1 ? sunkenShipsPlayer2 : sunkenShipsPlayer1;
 
-        for (Point p : shipsPlayer1.keySet()) {
-            if (!sunkenShipsPlayer1.containsKey(p)) {
-                return false;
-            }
-        }
-
-        for (Point p : shipsPlayer2.keySet()) {
-            if (!sunkenShipsPlayer2.containsKey(p)) {
+        for (Point p : ships.keySet()) {
+            if (!sunkenShips.containsKey(p)) {
                 return false;
             }
         }

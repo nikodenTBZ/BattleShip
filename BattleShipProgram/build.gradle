@@ -10,5 +10,9 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
     testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    // AssertJ
+    testImplementation "org.assertj:assertj-core:3.13.2"
 }
