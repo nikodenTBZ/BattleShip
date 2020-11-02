@@ -3,8 +3,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import static Tools.Constants.*;
 
-public class Playground {
+public class Playground extends Game {
 
     public Map<Character, Integer> letterMap = new HashMap<>();
     private HashMap<Point, Boat> shipsPlayer1;
@@ -73,7 +74,7 @@ public class Playground {
         while (shipLengt > 1) {
             while (availableShipsPlayerX.get(shipLengt) >= 1) {
                 int counterAvaibleShips = availableShipsPlayerX.get(shipLengt);
-                System.out.println("Please type in your Coordinates of the Start point of your Boat with the Lenght " + shipLengt);
+                System.out.println(TYPEINCOORDINATES + shipLengt);
                 ArrayList<Point> coordinateList = getCorrectCoordinatesAndPoints();
                 coordinateList.get(0).setLocation(coordinateList.get(0).getX()-1, coordinateList.get(0).getY()-1);
                 coordinateList.get(1).setLocation(coordinateList.get(1).getX()-1, coordinateList.get(1).getY()-1);
@@ -115,7 +116,7 @@ public class Playground {
                         availableShipsPlayerX.put(shipLengt, --counterAvaibleShips);
                         printManager(false);
                     } else {
-                        System.out.println("Please type in correct Coordinates");
+                        System.out.println(TYPEINCORRECTCOORDINATES);
                     }
                 }
             }
@@ -149,14 +150,14 @@ public class Playground {
         Point p2 = null;
 
         do {
-            System.out.println("Player " + activePlayer + ": Please type in the start and end of the ship eg.[A1 A2]");
+            System.out.println(PLAYER + activePlayer + STARTENDSHIP);
             input = s.nextLine();
 
             if (input.matches("[a-jA-J][0-9]+\\s[a-jA-J][0-9]+")) {
                 input = input.toUpperCase();
                 String[] locationAndDestination = input.split(" ");
 
-                //Create two points with the entered Coordinates, converts the letters to numbers
+                //Create two points with the entered Coordinates, converts the LETTERS to numbers
                 //Check if the Y number is 1 or 2 digits
                 if (locationAndDestination[0].length() == 2){
                     p1 = new Point(letterMap.get(locationAndDestination[0].charAt(0)),
@@ -180,7 +181,7 @@ public class Playground {
                 }
 
                 //End the game if the user entered resign
-            } else if (input.equals("resign")) {
+            } else if (input.equals(RESIGN)) {
                 isRegexValid = true;
             }
         } while (!isRegexValid);
@@ -199,7 +200,7 @@ public class Playground {
         Point p1 = null;
 
         do {
-            System.out.println("Player " + activePlayer + ": Please type in the point of the shot eg.[A1]");
+            System.out.println(PLAYER + activePlayer + TYPEINSHOT);
             input = s.nextLine();
 
             if (input.matches("[a-jA-J][0-9]+")) {
@@ -219,7 +220,7 @@ public class Playground {
                     isRegexValid = true;
                 }
                 //End the game if the user entered resign
-            } else if (input.equals("resign")) {
+            } else if (input.equals(RESIGN)) {
                 isRegexValid = true;
             }
         } while (!isRegexValid);
@@ -388,15 +389,15 @@ public class Playground {
         }
 
 
-        System.out.println(Config.letters);
-        System.out.println(Config.tab + Config.line);
+        System.out.println(LETTERS);
+        System.out.println(TAB + LINE);
         for (int x = 0; x < 10; x++, number++) {
-            System.out.print(number + Config.tab + Config.border);
+            System.out.print(number + TAB + BORDER);
             for (int y = 0; y < 9; y++) {
-                System.out.print(Config.tab + board[y][x] + Config.tab + Config.border);
+                System.out.print(TAB + board[y][x] + TAB + BORDER);
             }
-            System.out.print(Config.tab + Config.tab + Config.border + "\n");
-            System.out.println(Config.tab + Config.line);
+            System.out.print(TAB + TAB + BORDER + "\n");
+            System.out.println(TAB + LINE);
         }
     }
 

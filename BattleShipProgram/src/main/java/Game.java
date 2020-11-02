@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import static Tools.Constants.*;
 
 public class Game {
     private final Playground playground = new Playground();
@@ -23,7 +24,7 @@ public class Game {
                 successful = playground.shoot();
                 playground.printManager(true);
                 if (successful){
-                    System.out.println("Hit");
+                    System.out.println(HIT);
                 } else {
                     System.out.println("No hit");
                 }

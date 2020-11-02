@@ -6,4 +6,5 @@ public class Boat extends Element{
     public Boat() {
         super('#');
     }
+
 }
