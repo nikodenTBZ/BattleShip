@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
  import java.time.format.DateTimeFormatter;
  import java.time.format.FormatStyle;
  import java.util.Locale;
+ import static Tools.Constants.*;
 
  public class FileManager {
     public void saveWinnerInFile(String winner) {
@@ -23,7 +24,8 @@ import java.time.LocalDateTime;
 
             out.println(printout);
         } catch (IOException e) {
-            //exception handling left as an exercise for the reader
+            //throw own exception
+            throw new CouldNotWriteException();
         }
 
     }

@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Starter {
+public class Starter extends Game {
     //Name:     BattleShip TUI Project
     //Author:   Dennis & Nikolai
     //Start:    28.09.2020

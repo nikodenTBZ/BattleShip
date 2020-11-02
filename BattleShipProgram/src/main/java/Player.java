@@ -1,6 +1,6 @@
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Player {
+public class Player extends Game {
 
     private static AtomicInteger count = new AtomicInteger(0);
     private int id;
