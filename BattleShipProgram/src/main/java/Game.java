@@ -28,7 +28,7 @@ public class Game {
                 if (successful){
                     System.out.println(HIT);
                 } else {
-                    System.out.println("No hit");
+                    System.out.println(NOHIT);
                 }
             } while (successful);
 
@@ -41,25 +41,25 @@ public class Game {
             //Newlines to hide the board of the enemy
             printSpace();
 
-            System.out.println("Player: " + playground.getActivePlayer() + " please type \"ok\" if ready");
+            System.out.println(PLAYER + playground.getActivePlayer() + " please type \"ok\" if ready");
             String ok = s.nextLine();
 
 
         }
 
         if (playground.getActivePlayer() == 1) {
-            System.out.println("Player 2 has won");
+            System.out.println(P2WON);
         } else {
-            System.out.println("Player 1 has won");
+            System.out.println(P1WON);
         }
 
     }
 
     public void createUser() {
         Scanner s = new Scanner(System.in);
-        System.out.println("Please type in a username for player 1");
+        System.out.println(USERNAMEP1);
         String username1 = s.nextLine();
-        System.out.println("Please type in a username for player 2");
+        System.out.println(USERNAMEP2);
         String username2 = s.nextLine();
 
         Player player1 = new Player(username1);
@@ -67,7 +67,7 @@ public class Game {
     }
 
     public void printSpace() {
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println(SPACE);
     }
 
 }
