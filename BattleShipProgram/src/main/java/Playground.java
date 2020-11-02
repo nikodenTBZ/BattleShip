@@ -375,19 +375,22 @@ public class Playground extends Game {
 
         if (activePlayer == 1) {
             if (!printOpponent) {
+                System.out.println("Player 1: My Ships and Opponents Shots/Hits");
                 board = fillCharArray(board, shipsPlayer1, shotsPlayer2, sunkenShipsPlayer1);
             } else {
+                System.out.println("Player 1: My Shots and Hits");
                 board = fillCharArray(board, new HashMap<Point, Boat>(), shotsPlayer1, sunkenShipsPlayer2);
             }
 
         } else {
             if (!printOpponent) {
+                        System.out.println("Player 2: My Ships and Opponents Shots/Hits");
                 board = fillCharArray(board, shipsPlayer2, shotsPlayer1, sunkenShipsPlayer2);
             } else {
+                System.out.println("Player 1: My Shots and Hits");
                 board = fillCharArray(board, new HashMap<Point, Boat>(), shotsPlayer2, sunkenShipsPlayer1);
             }
         }
-
 
         System.out.println(LETTERS);
         System.out.println(TAB + LINE);

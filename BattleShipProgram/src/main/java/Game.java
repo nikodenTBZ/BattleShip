@@ -28,7 +28,7 @@ public class Game {
                 if (successful){
                     System.out.println(HIT);
                 } else {
-                    System.out.println(NOHIT);
+                    System.out.println(MISSED);
                 }
             } while (successful);
 
