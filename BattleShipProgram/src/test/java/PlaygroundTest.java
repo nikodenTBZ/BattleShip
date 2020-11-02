@@ -28,4 +28,10 @@ class PlaygroundTest {
     }
 
 
+    @Test
+    void getActivePlayer() {
+        playground = new Playground();
+        playground.setActivePlayer(2);
+        Assertions.assertThat(playground.getActivePlayer()).isEqualTo(2);
+    }
 }
