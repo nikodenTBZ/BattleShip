@@ -2,9 +2,11 @@ import java.util.Scanner;
 import static Tools.Constants.*;
 
 public class Game {
-    private final Playground playground = new Playground();
+
 
     public void playGame() {
+        Playground playground = new Playground();
+
         Scanner s = new Scanner(System.in);
         createUser();
 

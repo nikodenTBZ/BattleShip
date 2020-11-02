@@ -1,13 +1,31 @@
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.runner.RunWith;
 
+import java.awt.*;
 
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PlaygroundTest {
 
-    @Test
-    void hasWon() {
+    private Playground playground;
 
+    @Test
+    public void hasWon() {
+    playground = new Playground();
+    playground.setActivePlayer(1);
+
+    playground.getShipsPlayer1().put(new Point(0,0),new Boat());
+    playground.getShipsPlayer1().put(new Point(1,0),new Boat());
+    playground.getShipsPlayer1().put(new Point(2,0),new Boat());
+
+    playground.getSunkenShipsPlayer1().put(new Point(0,0),new Hit());
+    playground.getSunkenShipsPlayer1().put(new Point(1,0),new Hit());
+    playground.getSunkenShipsPlayer1().put(new Point(2,0),new Hit());
+
+    Assertions.assertThat(playground.hasWon()).isEqualTo(true);
     }
+
+
 }

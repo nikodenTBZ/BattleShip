@@ -205,11 +205,16 @@ public class Playground extends Game {
 
             if (input.matches("[a-jA-J][0-9]+")) {
                 input = input.toUpperCase();
-                String[] locationAndDestination = input.split(" ");
 
                 //Create one points with the entered Coordinate, converts the letter to numbers
-                p1 = new Point(letterMap.get(locationAndDestination[0].charAt(0)),
-                        Integer.parseInt(locationAndDestination[0].substring(1, 2)));
+                //Check if the Y number is 1 or 2 digits
+                if (input.length() == 2){
+                    p1 = new Point(letterMap.get(input.charAt(0)),
+                            Integer.parseInt(input.substring(1, 2)));
+                } else {
+                    p1 = new Point(letterMap.get(input.charAt(0)),
+                            Integer.parseInt(input.substring(1, 3)));
+                }
 
                 if (p1.getY() <= 10 && p1.getX() <= 10) {
                     isRegexValid = true;
@@ -256,13 +261,13 @@ public class Playground extends Game {
         if (activePlayer == 1) {
             if (shipsPlayer2.containsKey(p)) {
                 sunkenShipsPlayer2.put(p, new Hit());
-                shipsPlayer2.remove(p);
+                //shipsPlayer2.remove(p);
                 return true;
             }
         } else {
             if (shipsPlayer1.containsKey(p)) {
                 sunkenShipsPlayer1.put(p, new Hit());
-                shipsPlayer1.remove(p);
+                //shipsPlayer1.remove(p);
                 return true;
             }
         }
@@ -444,5 +449,21 @@ public class Playground extends Game {
 
     public void setActivePlayer(int activePlayer) {
         this.activePlayer = activePlayer;
+    }
+
+    public HashMap<Point, Boat> getShipsPlayer1() {
+        return shipsPlayer1;
+    }
+
+    public HashMap<Point, Boat> getShipsPlayer2() {
+        return shipsPlayer2;
+    }
+
+    public HashMap<Point, Hit> getSunkenShipsPlayer1() {
+        return sunkenShipsPlayer1;
+    }
+
+    public HashMap<Point, Hit> getSunkenShipsPlayer2() {
+        return sunkenShipsPlayer2;
     }
 }
